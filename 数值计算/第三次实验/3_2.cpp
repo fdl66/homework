@@ -10,11 +10,6 @@ double f(double x)
 }
 int main()
 {
-	int k[10],n[[10]];
-	for(int i=0;i<6;i++){
-		k[i]=i;
-		n[i]=pow(2,i);
-	}
 	double ti[50],xin[50],ke[50],lon[50];
 	memset(ti,0,sizeof(ti));
 	memset(xin,0,sizeof(xin));
@@ -29,30 +24,36 @@ int main()
 			x[j]=double(i)/pow(2,i);
 		}
 		ti[(int)(pow(2,i))]+=(f(x[0])+f(x[int(pow(2,i))]));
-		for(int i=1;i<pow(2,i);i++){
-			ti[(int)(pow(2,i))]+=f(x[i]);
+		for(int j=1;j<pow(2,i);j++){
+			ti[(int)(pow(2,i))]+=2*f(x[j]);
 		}
+		ti[(int)(pow(2,i))]/=(2*(pow(2,i)));
 	}
-	//复化辛普森公式
-	for(int i=1;i<6;i++){
-		for(int j=0;j<=pow(2,i);j++){
-			x[j]=double(i)/pow(2,i);
-		}
-		xin[(int)(pow(2,i-1))]+=(f(x[0])+f(x[int(pow(2,i))]));
-		for(int i=1;i<pow(2,i);i++){
-			if(i%2==1)xin[(int)(pow(2,i-1))]+=4*f(x[i]);
-			else xin[(int)(pow(2,i-1))]+=2*f(x[i]);
-		}
-	} 
-	//复化科特斯公式
-	for(int i=2;i<6;i++){
-		for(int j=0;j<=pow(2,i);j++){
-			x[j]=double(i)/pow(2,i);
-		}
-		
-	}
-	//龙贝格
 	
-	 
+	//复化辛普森公式
+	for(int i=0;i<5;i++){
+		xin[(int)(pow(2,i))]=3*ti[2*(int)(pow(2,i))]/4-ti[(int)(pow(2,i))]/4;
+	}
+
+	//复化科特斯公式
+	for(int i=0;i<4;i++){
+		ke[(int)(pow(2,i))]=16*xin[2*(int)(pow(2,i))]/15-xin[(int)(pow(2,i))]/15;
+	}
+
+	//龙贝格
+	for(int i=0;i<3;i++){
+		lon[(int)(pow(2,i))]=64*ke[2*(int)(pow(2,i))]/63-ke[(int)(pow(2,i))]/63;
+	}
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+	for(int i=0;i<6;i++){
+		cout<<i<<" ";
+		int k=pow(2,i);
+		printf("%2d ",k);
+		printf("%11.7lf  ",ti[k]);
+		if(i-1>=0)printf("%11.7lf  ",xin[(int)(pow(2,i-1))]);
+		if(i-2>=0)printf("%11.7lf  ",ke[(int)(pow(2,i-2))]);
+		if(i-3>=0)printf("%11.7lf  ",lon[(int)(pow(2,i-3))]);
+		cout<<endl;
+	} 
 	return 0;
 }
