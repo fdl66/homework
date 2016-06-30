@@ -18,6 +18,7 @@ int main()
 	double x[50];
 	memset(x,0,sizeof(x));
 	
+	printf("k   区间等分数  梯形序列    辛普森序列    柯特斯序列   龙贝格序列\n") ; 
 	//复化梯形公式 
 	for(int i=0;i<6;i++){
 		for(int j=0;j<=pow(2,i);j++){
@@ -32,7 +33,7 @@ int main()
 	
 	//复化辛普森公式
 	for(int i=0;i<5;i++){
-		xin[(int)(pow(2,i))]=3*ti[2*(int)(pow(2,i))]/4-ti[(int)(pow(2,i))]/4;
+		xin[(int)(pow(2,i))]=4*ti[2*(int)(pow(2,i))]/3-ti[(int)(pow(2,i))]/3;
 	}
 
 	//复化科特斯公式
@@ -48,7 +49,7 @@ int main()
 	for(int i=0;i<6;i++){
 		cout<<i<<" ";
 		int k=pow(2,i);
-		printf("%2d ",k);
+		printf("%11d ",k);
 		printf("%11.7lf  ",ti[k]);
 		if(i-1>=0)printf("%11.7lf  ",xin[(int)(pow(2,i-1))]);
 		if(i-2>=0)printf("%11.7lf  ",ke[(int)(pow(2,i-2))]);

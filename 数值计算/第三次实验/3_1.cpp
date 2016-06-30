@@ -10,10 +10,10 @@ double f(double x)
 }
 int main()
 {
-	int n;
+	int k,n;
 	cout<<"请输入区间等分次数："<<endl; 
-	cin>>n;
-	n=pow(2,n);
+	cin>>k;
+	n=pow(2,k);
 	double fk[20];
 	memset(fk,0,sizeof(fk));
 	double ans=0;
